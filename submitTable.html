@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style >
+		#div1{
+			width:200px;
+			height:200px;
+			margin:100px auto;
+			padding:50px;
+            text-align:center;
+		}
+		#div1 input{
+			width:200px;
+			height:30px;
+			font-size:18px;
+			margin-top:10px;
+		}
+		#div1 span{font-size:14px; color:#cc0000; margin-top:5px;}
+	</style>
+</head>
+<body>
+	<div id='div1'>
+		<input type="text" id='username' placeholder= "用户名">
+		<span id='username_span'>6~~8个字符，可使用字母、数字、下划线，需以字母开头</span>
+		<input type="text" placeholder="密码">
+	</div>
+</body>
+<script>
+	//表单验证是在输入框失去焦点的时候完成。onblur
+	var oUsername = document.getElementById("username");
+	var oUsername_span = document.getElementById("username_span");
+	
+	//事件驱动函数
+	oUsername.onblur=function(){
+		var ovalue = oUsername.value.replace(/ /g, "");
+		oUsername.value=ovalue;
+	
+		if(ovalue.length > 18 || ovalue.length < 6){
+			oUsername_span.innerHTML="！长度应为6~18个字符";
+		}else if(ovalue[0] >= "0" && ovalue[0] <= "9"){
+			oUsername_span.innerHTML="！邮件地址开头不能为数字";
+		}else{
+			var istrue = true;
+			for(var i=0; i < ovalue.length; i++){
+ 	           if(!isABC(ovalue[i])){
+	            	istrue = false;
+	            	break;
+	            }
+			}
+			if (istrue){
+				oUsername_span.innerHTML="恭喜！此名称可以注册！";
+			}else{
+				oUsername_span.innerHTML="！使用字母、数字、下划线";
+			}
+		}
+	}
+	//alert(isABC(","));
+	function isABC(charStr){
+		if(charStr >= "a" && charStr <= "z" 
+			|| charStr >= "A" && charStr <= "Z" 
+			|| charStr >= "0" && charStr <="9" 
+			|| charStr == "_"){
+			return true;
+		}else{
+			return false;
+		}
+	 }
+		
+</script>
+</html>

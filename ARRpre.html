@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script>
+		var arr = [10,20,20,30,40,50,40,30,20,10];
+		/*function noRepeat(arr){
+			for(var i=0; i<arr.length-1;i++){
+				for(var j=i+1; j<arr.length;j++){
+					if (arr[i] === arr[j]){
+						arr.splice(j,1);
+						j--;
+					}			
+				}
+			}
+		}
+		noRepeat(arr);*/
+		//2015年之前的都不兼容
+		arr=[...new Set(arr)];
+		alert(arr);
+	</script>
+</head>
+<body>
+	
+</body>
+</html>
