@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Code</title>
+    <style>
+        body{
+            margin: 0;
+            overflow: hidden;/*隐藏超出窗口的部分，滚动条不出现*/
+        }
+    </style>
+</head>
+
+<body>
+<canvas id="myCanvas"></canvas>
+<script>
+    //const 用于声明变量或常量，声明是进行初始化且初始化后值不可修改
+    
+    /*
+    
+     获取浏览器宽高赋值给"myCanvas"，并初始化
+    availHeight返回显示屏幕的高度 (除 Windows 任务栏之外);
+    availWidth返回显示屏幕的宽度 (除 Windows 任务栏之外);
+    */
+    const width = document.getElementById("myCanvas").width = screen.availWidth;
+    const height = document.getElementById("myCanvas").height = screen.availHeight;
+    
+    /*获取一个用于在画布上绘图的环境
+    语法
+    Canvas.getContext(contextID)
+    参数
+    参数 contextID 指定了您想要在画布上绘制的类型。当前唯一的合法值是 "2d"，它指定了二维绘图，并且导致这个方法返回一个环境对象，该对象导出一个二维绘图 API。*/
+    const ctx = document.getElementById("myCanvas").getContext("2d");
+
+    /*Math.ceil() 函数返回大于或等于一个给定数字的最小整数。*/
+    const arr = Array(Math.ceil(width / 10)).fill(0);
+
+    /*指定显示的字符串，分割为单个字符，返回一个数组*/
+    const str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".split("");
+
+    function rain() {
+     //这里的重点就是每次调用这个方法的时候都会重新绘制一张透明度为0.05的黑色画布来覆盖前图
+     //所以就会形成人眼中的下雨效果
+
+        /*rgba：a=alpha透明度，取值0~1 ctx.fillStyle设置背景颜色*/
+        ctx.fillStyle = "rgba(0,0,0,0.05)";
+        /*绘制已填色的矩形，默认黑色*/
+        ctx.fillRect(0, 0, width, height);
+        ctx.fillStyle = "#0f0";
+        arr.forEach(function (value, index) {
+            /*math函数库中的一个函数,math.floor(x)返回小于参数x的最大整数,即对浮点数向下取整。x[]的取值*/
+            ctx.fillText(str[Math.floor(Math.random() * str.length)], index * 10, value + 10);
+            arr[index] = value >= height || value > 8888 * Math.random() ? 0 : value + 10;
+        });
+    }
+
+    setInterval(rain, 30);
+</script>
+</body>
+</html>

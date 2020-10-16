@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<script src="js-tools.js">
+		
+	</script>
+</head>
+<body>
+	<div id="div1">00000</div>
+	<button id="but1">获取验证码</button>
+</body>
+<script>
+	var obtn=document.getElementById("but1");
+	var odiv=document.getElementById("div1");
+	obtn.onclick=function(){
+        odiv.innerHTML=testCode(6);
+	}
+</script>
+</html>
